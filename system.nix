@@ -1,14 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+# system.nix
+# Main system configuration
+{ config, lib, pkgs, ... }: {
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -17,16 +9,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
-  # Luks
-  boot.initrd.luks.devices = {
-    crypted = {
-      device = "/dev/disk/by-uuid/70d42b03-de35-4d50-ae1e-f74a4f703dce";
-      preLVM = true;
-    };
-  };
-
   # Enable networking
-  networking.hostName = "fw-al";
   networking.networkmanager.enable = true;
 
   # Set your time zone.
@@ -52,20 +35,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.tony = {
-    isNormalUser = true;
-    description = "";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-      firefox-wayland
-      bind
-      keepassxc
-      git
-      pfetch
-    ];
   };
 
   # Allow unfree packages
@@ -120,7 +89,8 @@
 
   nix.settings.auto-optimise-store = true;
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.substituters = [ "https://nix-community.cachix.org" "https://cache.nixos.org/" ];
+  nix.settings.trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
 
   system.stateVersion = "23.11";
-
 }
