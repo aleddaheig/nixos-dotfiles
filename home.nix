@@ -1,5 +1,14 @@
 # home.nix
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+  let
+    synology-drive-xcb = pkgs.synology-drive-client.overrideAttrs (prevAttrs: {
+      nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
+
+      postInstall = (prevAttrs.postInstall or "") + ''
+        wrapProgram $out/bin/synology-drive --set QT_QPA_PLATFORM xcb
+      '';
+    });
+  in {
 
   home.username = "tony";
   home.homeDirectory = "/home/tony";
@@ -7,7 +16,6 @@
   home.packages = with pkgs; [
     firefox-wayland
     bind
-    keepassxc
 
     pfetch
     neofetch
@@ -21,7 +29,10 @@
     tree
 
     signal-desktop
+    telegram-desktop
     jetbrains.clion
+    teams-for-linux
+    synology-drive-xcb
 
     btop
 

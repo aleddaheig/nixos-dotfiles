@@ -54,6 +54,7 @@
     gnome.gnome-tweaks
     gnome.gpaste
     gnomeExtensions.night-theme-switcher
+    gnomeExtensions.appindicator
   ];
 
   fonts.packages = with pkgs; [
