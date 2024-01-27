@@ -1,11 +1,17 @@
-{ config, pkgs, ... }:
+# home.nix
+{ config, pkgs, ... }: {
 
-{
   home.username = "tony";
   home.homeDirectory = "/home/tony";
 
   home.packages = with pkgs; [
+    firefox-wayland
+    bind
+    keepassxc
+
+    pfetch
     neofetch
+    
     zip
     xz
     unzip
@@ -15,6 +21,7 @@
     tree
 
     signal-desktop
+    jetbrains.clion
 
     btop
 
@@ -37,8 +44,17 @@
     '';
 
     shellAliases = {
-      vim = "nvim";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    extraConfig = ''
+      set expandtab
+      set tabstop=2
+      set shiftwidth=2
+    '';
   };
 
   home.stateVersion = "23.11";
