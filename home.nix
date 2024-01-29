@@ -68,6 +68,14 @@
     '';
   };
 
+  # Enable gnome-keyring - omit gnome-keyring-ssh
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" ];
+  };
+
+  services.gpg-agent.pinentryFlavor = "gnome3";
+
   home.stateVersion = "23.11";
 
   programs.home-manager.enable = true;
