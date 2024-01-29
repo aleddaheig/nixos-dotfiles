@@ -55,6 +55,7 @@
     gnome.gpaste
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.appindicator
+    gnome.networkmanager-openconnect
   ];
 
   fonts.packages = with pkgs; [
@@ -72,12 +73,6 @@
 
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
-
-  services.gnome.gnome-keyring.enable = lib.mkForce false;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   nix.gc = {
     automatic = true;
