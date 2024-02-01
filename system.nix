@@ -22,6 +22,8 @@
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
     desktopManager.gnome.enable = true;
+    # Workaround for Gnome-control-center missing schema
+    desktopManager.gnome.sessionPath = [ pkgs.gnome.gpaste ];
     layout = "us";
     xkbVariant = "";
   };
