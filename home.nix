@@ -31,6 +31,7 @@
     signal-desktop
     telegram-desktop
     jetbrains.clion
+    vscodium
     teams-for-linux
     synology-drive-xcb
 

@@ -47,7 +47,11 @@
   environment.systemPackages = with pkgs; [
     appimage-run
     neovim
+    inetutils
     gcc
+    gdb
+    cmake
+    gnumake
     gnupg
     pinentry-gnome
     sbctl
