@@ -17,6 +17,10 @@
     firefox-wayland
     bind
 
+    wineWowPackages.waylandFull
+
+    appimage-run
+
     pfetch
     neofetch
     
@@ -36,6 +40,9 @@
     synology-drive-xcb
 
     btop
+    htop
+
+    wireshark-qt
 
     pciutils
     usbutils
