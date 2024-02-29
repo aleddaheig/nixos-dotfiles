@@ -48,6 +48,7 @@
     appimage-run
     neovim
     inetutils
+    wireshark-qt
     gcc
     gdb
     cmake
@@ -79,6 +80,11 @@
 
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
+
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark-qt;
+  };
 
   nix.gc = {
     automatic = true;

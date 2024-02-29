@@ -62,6 +62,6 @@
   users.users.tony = {
     isNormalUser = true;
     description = "";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "wireshark" ];
   };
 }
