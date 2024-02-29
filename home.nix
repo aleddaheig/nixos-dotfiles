@@ -39,10 +39,10 @@
     teams-for-linux
     synology-drive-xcb
 
+    zettlr
+
     btop
     htop
-
-    wireshark-qt
 
     pciutils
     usbutils
