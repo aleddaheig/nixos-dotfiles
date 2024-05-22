@@ -15,6 +15,12 @@
 
   home.packages = with pkgs; [
     firefox-wayland
+    brave
+    
+    bisq-desktop
+
+    gnome.ghex
+
     bind
 
     wineWowPackages.waylandFull
@@ -40,6 +46,11 @@
     synology-drive-xcb
 
     zettlr
+    drawing
+    gimp
+    xournalpp
+    logseq
+    gImageReader
 
     btop
     htop
@@ -83,6 +94,16 @@
   };
 
   services.gpg-agent.pinentryFlavor = "gnome3";
+
+  xdg.desktopEntries = {
+    zettlr = {
+      name = "Zettlr";
+      exec = "zettlr --enable-features=UseOzonePlatform --ozone-platform=wayland --no-sandbox %U";
+      terminal = false;
+      categories = [ "Application" "Office" ];
+      mimeType = [ "text/markdown" ];
+    }; 
+  };
 
   home.stateVersion = "23.11";
 

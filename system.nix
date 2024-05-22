@@ -6,7 +6,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
   # Enable networking
@@ -54,6 +54,7 @@
     cmake
     gnumake
     gnupg
+    python3
     pinentry-gnome
     sbctl
     tpm2-tss
@@ -64,6 +65,8 @@
     gnomeExtensions.appindicator
     gnome.networkmanager-openconnect
   ];
+
+  environment.gnome.excludePackages = [  pkgs.epiphany ];
 
   fonts.packages = with pkgs; [
     ibm-plex
