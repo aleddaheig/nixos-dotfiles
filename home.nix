@@ -16,6 +16,8 @@
   home.packages = with pkgs; [
     firefox-wayland
     brave
+
+    zeal
     
     bisq-desktop
 
@@ -40,8 +42,7 @@
 
     signal-desktop
     telegram-desktop
-    jetbrains.clion
-    vscodium
+    vscode
     teams-for-linux
     synology-drive-xcb
 
@@ -93,7 +94,7 @@
     components = [ "pkcs11" "secrets" ];
   };
 
-  services.gpg-agent.pinentryFlavor = "gnome3";
+  services.gpg-agent.pinentryPackage = "pkgs.pinentry-gnome3";
 
   xdg.desktopEntries = {
     zettlr = {
@@ -105,7 +106,7 @@
     }; 
   };
 
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 }

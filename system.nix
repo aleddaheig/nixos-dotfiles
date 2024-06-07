@@ -24,8 +24,10 @@
     desktopManager.gnome.enable = true;
     # Workaround for Gnome-control-center missing schema
     desktopManager.gnome.sessionPath = [ pkgs.gnome.gpaste ];
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable sound with pipewire.
@@ -55,7 +57,7 @@
     gnumake
     gnupg
     python3
-    pinentry-gnome
+    pinentry-gnome3
     sbctl
     tpm2-tss
     git
@@ -63,6 +65,7 @@
     gnome.gpaste
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.appindicator
+    gnomeExtensions.dock-from-dash
     gnome.networkmanager-openconnect
   ];
 
@@ -107,5 +110,5 @@
   virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "tony" ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
