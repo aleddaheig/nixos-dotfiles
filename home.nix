@@ -14,8 +14,8 @@
   home.homeDirectory = "/home/tony";
 
   home.packages = with pkgs; [
-    firefox-wayland
     brave
+    floorp
 
     localsend
 
