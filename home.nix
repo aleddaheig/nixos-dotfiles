@@ -5,7 +5,7 @@
       nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
 
       postInstall = (prevAttrs.postInstall or "") + ''
-        wrapProgram $out/bin/synology-drive --set QT_QPA_PLATFORM xcb
+        wrapQtApp $out/bin/synology-drive --set QT_QPA_PLATFORM xcb
       '';
     });
   in {
@@ -17,11 +17,16 @@
     firefox-wayland
     brave
 
+    localsend
+
+    shotcut
+
     zeal
     
     bisq-desktop
 
     gnome.ghex
+    papers
 
     bind
 
@@ -40,9 +45,11 @@
     file
     tree
 
+    yt-dlp
+
     signal-desktop
     telegram-desktop
-    vscode
+    vscodium
     teams-for-linux
     synology-drive-xcb
 
@@ -86,6 +93,12 @@
       set tabstop=2
       set shiftwidth=2
     '';
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true; # see note on other shells below
+    nix-direnv.enable = true;
   };
 
   # Enable gnome-keyring - omit gnome-keyring-ssh
