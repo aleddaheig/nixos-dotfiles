@@ -23,16 +23,12 @@
 
     zeal
     
-    bisq-desktop
-
     gnome.ghex
     papers
 
     bind
 
     wineWowPackages.waylandFull
-
-    appimage-run
 
     pfetch
     neofetch
@@ -53,9 +49,7 @@
     teams-for-linux
     synology-drive-xcb
 
-    zettlr
     drawing
-    gimp
     xournalpp
     logseq
     gImageReader
@@ -108,16 +102,6 @@
   };
 
   services.gpg-agent.pinentryPackage = "pkgs.pinentry-gnome3";
-
-  xdg.desktopEntries = {
-    zettlr = {
-      name = "Zettlr";
-      exec = "zettlr --enable-features=UseOzonePlatform --ozone-platform=wayland --no-sandbox %U";
-      terminal = false;
-      categories = [ "Application" "Office" ];
-      mimeType = [ "text/markdown" ];
-    }; 
-  };
 
   home.stateVersion = "24.05";
 
