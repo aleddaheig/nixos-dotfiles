@@ -6,7 +6,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_8;
   hardware.enableAllFirmware = true;
 
   # Enable networking
@@ -47,6 +47,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    corefonts
     appimage-run
     neovim
     inetutils
@@ -65,8 +66,10 @@
     gnome.gpaste
     gnomeExtensions.night-theme-switcher
     gnomeExtensions.appindicator
-    gnomeExtensions.dock-from-dash
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.blur-my-shell
     gnome.networkmanager-openconnect
+    globalprotect-openconnect
   ];
 
   environment.gnome.excludePackages = [  pkgs.epiphany ];
@@ -80,7 +83,7 @@
 
   # Add env vars
   environment.sessionVariables = {
-    QT_QPA_PLATFORM = "wayland";
+    QT_QPA_PLATFORM = "wayland;xcb";
     NIXOS_OZONE_WL = "1";
   };
 
