@@ -25,6 +25,11 @@
     pkiBundle = "/etc/secureboot";
   };
 
+  environment.systemPackages = with pkgs; [
+    sbctl
+    tpm2-tss
+  ];
+
   # TPM for unlocking LUKS
   #
   # TPM kernel module must be enabled for initrd. Device driver is viewable via the command:

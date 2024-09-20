@@ -47,29 +47,26 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    corefonts
     appimage-run
-    neovim
-    inetutils
-    wireshark-qt
+    cmake
+    corefonts
     gcc
     gdb
-    cmake
-    gnumake
-    gnupg
-    python3
-    pinentry-gnome3
-    sbctl
-    tpm2-tss
     git
     gnome.gnome-tweaks
     gnome.gpaste
-    gnomeExtensions.night-theme-switcher
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.blur-my-shell
     gnome.networkmanager-openconnect
-    globalprotect-openconnect
+    gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.night-theme-switcher
+    gnumake
+    gnupg
+    inetutils
+    neovim
+    openfortivpn
+    pinentry-gnome3
+    wireshark-qt
   ];
 
   environment.gnome.excludePackages = [  pkgs.epiphany ];

@@ -1,5 +1,5 @@
 # home.nix
-{ config, pkgs, ... }: 
+{ config, inputs, pkgs, unstable, ... }: 
   let
     synology-drive-xcb = pkgs.synology-drive-client.overrideAttrs (prevAttrs: {
       nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
@@ -9,56 +9,42 @@
       '';
     });
   in {
-
   home.username = "tony";
   home.homeDirectory = "/home/tony";
 
   home.packages = with pkgs; [
-    brave
-    floorp
-
-    localsend
-
-    shotcut
-
-    zeal
-    
-    gnome.ghex
-    papers
-
     bind
-
-    wineWowPackages.waylandFull
-
-    pfetch
-    neofetch
-    
-    zip
-    xz
-    unzip
-    p7zip
-
-    file
-    tree
-
-    yt-dlp
-
-    signal-desktop
-    telegram-desktop
-    vscodium
-    teams-for-linux
-    synology-drive-xcb
-
-    drawing
-    xournalpp
-    logseq
-    gImageReader
-
+    brave
     btop
+    drawing
+    evince
+    file
+    floorp
+    gImageReader
+    gnome.ghex
     htop
-
+    localsend
+    mumble
+    neofetch
+    p7zip
     pciutils
+    pfetch
+    shotcut
+    signal-desktop
+    synology-drive-xcb
+    teams-for-linux
+    telegram-desktop
+    tree
+    unzip
     usbutils
+    vscodium.fhs
+    xournalpp
+    xz
+    yt-dlp
+    zeal
+    zip
+
+    unstable.logseq
   ];
 
   programs.git = {
@@ -73,6 +59,8 @@
 
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+
+      alias tnc="nc -zv"
     '';
 
     shellAliases = {

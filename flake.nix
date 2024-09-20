@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Secure Boot for NixOS
     lanzaboote = {
@@ -20,22 +21,25 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
     let
+      system = "x86_64-linux";
       # Base OS configs
       osModules = [
         inputs.lanzaboote.nixosModules.lanzaboote
         ./secure-boot.nix
         ./system.nix
       ];
-
+      unstable = import nixpkgs-unstable {inherit system;};
     in {
+
       nixosConfigurations = {
 
         fw-al = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = osModules ++ [
             inputs.home-manager.nixosModules.home-manager {
+              home-manager.extraSpecialArgs = { inherit unstable; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.tony = import ./home.nix;
