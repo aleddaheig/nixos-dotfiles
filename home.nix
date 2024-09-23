@@ -48,6 +48,17 @@
     unstable.logseq
   ];
 
+  xdg.desktopEntries = {
+    umlet = {
+      name = "UMLet";
+      genericName = "UMLet";
+      exec = "umlet %f";
+      terminal = false;
+      categories = [ "Development" ];
+      mimeType = [ "application/xml" "application/uxf" ];
+    };
+  };
+
   programs.git = {
     enable = true;
     userName = "Anthony Ledda";
