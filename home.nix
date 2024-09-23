@@ -35,6 +35,7 @@
     teams-for-linux
     telegram-desktop
     tree
+    umlet
     unzip
     usbutils
     vscodium.fhs
@@ -61,6 +62,7 @@
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
 
       alias tnc="nc -zv"
+      alias gc="sudo nix-collect-garbage --delete-old"
     '';
 
     shellAliases = {
