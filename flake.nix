@@ -27,10 +27,15 @@
       # Base OS configs
       osModules = [
         inputs.lanzaboote.nixosModules.lanzaboote
-        ./secure-boot.nix
-        ./system.nix
+        ./modules/secure-boot.nix
+        ./modules/gui.nix
+        ./modules/docker.nix
+        ./modules/fhs.nix
       ];
-      unstable = import nixpkgs-unstable {inherit system;};
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
 
       nixosConfigurations = {

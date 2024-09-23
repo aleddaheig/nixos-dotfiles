@@ -5,6 +5,13 @@
 
   networking.useDHCP = lib.mkDefault true;
 
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.enableAllFirmware = true;
+
   # Start systemd on early stage
   boot.initrd.systemd.enable = true;
   boot.initrd.systemd.enableTpm2 = false;
@@ -37,41 +44,15 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # Enable LVFS testing to get UEFI updates
   services.fwupd.extraRemotes = [ "lvfs-testing" ];
 
-  # Enable fractional scaling
-  services.xserver.desktopManager.gnome = {
-    extraGSettingsOverrides = ''
-      [org.gnome.mutter]
-      experimental-features=['scale-monitor-framebuffer']
-    '';
-    extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
-  };
-
-  services.fprintd.enable = true;
-
-  security.pam.services.login.fprintAuth = false;
-  # similarly to how other distributions handle the fingerprinting login
-  security.pam.services.gdm-fingerprint = lib.mkIf (config.services.fprintd.enable) {
-        text = ''
-          auth       required                    pam_shells.so
-          auth       requisite                   pam_nologin.so
-          auth       requisite                   pam_faillock.so      preauth
-          auth       required                    ${pkgs.fprintd}/lib/security/pam_fprintd.so
-          auth       optional                    pam_permit.so
-          auth       required                    pam_env.so
-          auth       [success=ok default=1]      ${pkgs.gnome.gdm}/lib/security/pam_gdm.so
-          auth       optional                    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so
-
-          account    include                     login
-
-          password   required                    pam_deny.so
-
-          session    include                     login
-          session    optional                    ${pkgs.gnome.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
-    '';
-  };
+  # Set your time zone.
+  time.timeZone = "Europe/Zurich";
+  i18n.defaultLocale = "en_US.utf8";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tony = {
@@ -79,4 +60,24 @@
     description = "";
     extraGroups = [ "networkmanager" "wheel" "docker" "wireshark" ];
   };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  # Updating Firmware
+  services.fwupd.enable = true;
+
+  nix.settings.auto-optimise-store = true;
+  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.substituters = [ "https://nix-community.cachix.org" "https://cache.nixos.org/" ];
+  nix.settings.trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "tony" ];
+
+  system.stateVersion = "24.05";
 }
