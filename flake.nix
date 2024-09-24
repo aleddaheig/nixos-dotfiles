@@ -31,6 +31,7 @@
         ./modules/gui.nix
         ./modules/docker.nix
         ./modules/fhs.nix
+        ./modules/logseq.nix
       ];
       unstable = import nixpkgs-unstable {
         inherit system;

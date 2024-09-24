@@ -24,6 +24,7 @@
     gnome.ghex
     htop
     localsend
+    logseq
     mumble
     neofetch
     p7zip
@@ -44,8 +45,6 @@
     yt-dlp
     zeal
     zip
-
-    unstable.logseq
   ];
 
   xdg.desktopEntries = {
