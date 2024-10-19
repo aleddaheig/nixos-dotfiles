@@ -54,6 +54,7 @@
     gnome.gnome-tweaks
     gnome.gpaste
     gnome.networkmanager-openconnect
+    gnome.gnome-sound-recorder
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     gnomeExtensions.dash-to-dock

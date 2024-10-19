@@ -23,20 +23,22 @@
     gImageReader
     gnome.ghex
     htop
+    jetbrains.datagrip
     localsend
     logseq
     mumble
     neofetch
     p7zip
     pciutils
+    pdfarranger
     pfetch
+    remmina
     shotcut
     signal-desktop
     synology-drive-xcb
     teams-for-linux
     telegram-desktop
     tree
-    umlet
     unzip
     usbutils
     vscodium.fhs
@@ -73,6 +75,7 @@
 
       alias tnc="nc -zv"
       alias gc="sudo nix-collect-garbage --delete-old"
+      alias logisim="java -jar ~/Dev/java/SYL/logisim-evolution.t.jar &"
     '';
 
     shellAliases = {
