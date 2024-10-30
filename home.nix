@@ -20,14 +20,18 @@
     evince
     file
     floorp
+    focuswriter
     gImageReader
     gnome.ghex
     htop
+    hunspellDicts.fr-any
+    imagemagick
     jetbrains.datagrip
     localsend
     logseq
     mumble
     neofetch
+    nmap
     p7zip
     pciutils
     pdfarranger
