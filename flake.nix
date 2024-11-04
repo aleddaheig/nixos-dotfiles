@@ -21,7 +21,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       # Base OS configs
@@ -39,15 +45,19 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
 
       nixosConfigurations = {
 
         fw-al = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = osModules ++ [
-            inputs.home-manager.nixosModules.home-manager {
-              home-manager.extraSpecialArgs = { inherit unstable; };
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = {
+                inherit unstable;
+              };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.tony = import ./home.nix;
@@ -55,6 +65,9 @@
             inputs.nixos-hardware.nixosModules.framework-13-7040-amd
             ./fw-al.nix
           ];
+          specialArgs = {
+            inherit nixpkgs;
+          };
         };
 
       };
