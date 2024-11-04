@@ -1,12 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # ......omit many configurations
-
   environment.systemPackages = with pkgs; [
-    # ......omit many packages
-
-    # Create an FHS environment using the command `fhs`, enabling the execution of non-NixOS packages in NixOS!
+    # Create an FHS environment using the command `fhs`
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
       pkgs.buildFHSUserEnv (base // {
       name = "fhs";
@@ -27,6 +23,4 @@
       extraOutputsToInstall = ["dev"];
     }))
   ];
-
-  # ......omit many configurations
 }

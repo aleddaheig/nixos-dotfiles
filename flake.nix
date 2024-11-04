@@ -31,6 +31,7 @@
         ./modules/fhs.nix
         ./modules/gui.nix
         ./modules/logseq.nix
+        ./modules/nixdev.nix
         ./modules/printing.nix
         ./modules/secure-boot.nix
       ];
