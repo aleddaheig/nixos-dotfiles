@@ -34,12 +34,8 @@
       osModules = [
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-        ./modules/docker.nix
-        ./modules/gui.nix
         ./modules/nix.nix
-        ./modules/printing.nix
         ./modules/secure-boot.nix
-        ./modules/virtualbox.nix
       ];
       pkgs = import nixpkgs {
         inherit system;

@@ -5,6 +5,11 @@
   imports = [
     ./hardware.nix
     ./disk.nix
+
+    ../modules/docker.nix
+    ../modules/gui.nix
+    ../modules/printing.nix
+    # ../modules/virtualbox.nix
   ];
 
   # Networking
@@ -52,7 +57,6 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-      "docker"
       "wireshark"
     ];
   };

@@ -75,18 +75,6 @@
     shellAliases = { };
   };
 
-  programs.neovim = {
-    enable = true;
-    vimAlias = true;
-    extraConfig = ''
-      set expandtab
-      set tabstop=2
-      set shiftwidth=2
-    '';
-  };
-
-  #programs.nixvim.enable = true;
-
   programs.direnv = {
     enable = true;
     enableBashIntegration = true; # see note on other shells below

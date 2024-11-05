@@ -68,7 +68,6 @@
     gnumake
     gnupg
     inetutils
-    neovim
     openfortivpn
     pinentry-gnome3
     wireshark-qt
