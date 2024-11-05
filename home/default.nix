@@ -1,15 +1,12 @@
 # home.nix
-{ config, pkgs, unstable, ... }: 
-  let
-    synology-drive-xcb = pkgs.synology-drive-client.overrideAttrs (prevAttrs: {
-      nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
+{
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
+{
 
-      postInstall = (prevAttrs.postInstall or "") + ''
-        wrapQtApp $out/bin/synology-drive --set QT_QPA_PLATFORM xcb
-      '';
-    });
-  in {
-  
   imports = [
     ./modules/fhs.nix
     ./modules/logseq.nix
@@ -19,7 +16,9 @@
   home.username = "tony";
   home.homeDirectory = "/home/tony";
 
-  home.packages = with pkgs; [
+  home.packages =
+    with pkgs;
+    [
       bind
       brave
       btop
@@ -56,18 +55,8 @@
       yt-dlp
       zeal
       zip
-    ] ++ (with unstable; [ synology-drive-client ]);
-
-  xdg.desktopEntries = {
-    umlet = {
-      name = "UMLet";
-      genericName = "UMLet";
-      exec = "umlet %f";
-      terminal = false;
-      categories = [ "Development" ];
-      mimeType = [ "application/xml" "application/uxf" ];
-    };
-  };
+    ]
+    ++ (with unstable; [ synology-drive-client ]);
 
   programs.git = {
     enable = true;
@@ -87,8 +76,7 @@
       alias logisim="java -jar ~/Dev/java/SYL/logisim-evolution.t.jar &"
     '';
 
-    shellAliases = {
-    };
+    shellAliases = { };
   };
 
   programs.neovim = {
@@ -112,7 +100,10 @@
   # Enable gnome-keyring - omit gnome-keyring-ssh
   services.gnome-keyring = {
     enable = true;
-    components = [ "pkcs11" "secrets" ];
+    components = [
+      "pkcs11"
+      "secrets"
+    ];
   };
 
   services.gpg-agent.pinentryPackage = "pkgs.pinentry-gnome3";

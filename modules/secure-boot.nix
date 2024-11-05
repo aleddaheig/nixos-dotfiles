@@ -1,6 +1,7 @@
 # secure-boot.nix
 # Requires lanzaboote flake
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
 
   # Quiet boot with plymouth - supports LUKS passphrase entry if needed
   boot.kernelParams = [
@@ -43,4 +44,3 @@
   security.tpm2.enable = true;
   security.tpm2.tctiEnvironment.enable = true;
 }
-
