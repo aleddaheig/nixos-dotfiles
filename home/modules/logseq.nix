@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 
 let
   logseq = pkgs.logseq.overrideAttrs (oldAttrs: {

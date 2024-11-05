@@ -1,11 +1,5 @@
 # fw-al.nix
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ config, lib, ... }:
 {
 
   imports = [

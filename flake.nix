@@ -27,12 +27,7 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      ...
-    }@inputs:
+    { nixpkgs, nixpkgs-unstable, ... }@inputs:
     let
       system = "x86_64-linux";
       # Base OS configs
@@ -69,6 +64,7 @@
                 extraSpecialArgs = {
                   inherit pkgs;
                   inherit unstable;
+                  inherit inputs;
                 };
                 useUserPackages = true;
                 users.tony = import ./home;

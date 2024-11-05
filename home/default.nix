@@ -1,16 +1,12 @@
 # home.nix
-{
-  config,
-  pkgs,
-  unstable,
-  ...
-}:
+{ pkgs, unstable, ... }:
 {
 
   imports = [
     ./modules/fhs.nix
     ./modules/logseq.nix
     ./modules/nixdev.nix
+    ./modules/neovim
   ];
 
   home.username = "tony";
