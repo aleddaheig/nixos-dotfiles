@@ -19,6 +19,11 @@
 
     # Provides module support for specific vendor hardware 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,14 +38,19 @@
       # Base OS configs
       osModules = [
         inputs.lanzaboote.nixosModules.lanzaboote
+        inputs.nixos-hardware.nixosModules.framework-13-7040-amd
         ./modules/docker.nix
-        ./modules/fhs.nix
         ./modules/gui.nix
-        ./modules/logseq.nix
-        ./modules/nixdev.nix
+        ./modules/nix.nix
         ./modules/printing.nix
         ./modules/secure-boot.nix
+        ./modules/virtualbox.nix
       ];
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        config.permittedInsecurePackages = [ "electron-27.3.11" ];
+      };
       unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -55,18 +65,19 @@
           modules = osModules ++ [
             inputs.home-manager.nixosModules.home-manager
             {
-              home-manager.extraSpecialArgs = {
-                inherit unstable;
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit pkgs;
+                  inherit unstable;
+                };
+                useUserPackages = true;
+                users.tony = import ./home;
               };
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.tony = import ./home.nix;
             }
-            inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-            ./fw-al.nix
+            ./fw-al
           ];
           specialArgs = {
-            inherit nixpkgs;
+            inherit inputs;
           };
         };
 

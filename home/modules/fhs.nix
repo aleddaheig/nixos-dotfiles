@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     # Create an FHS environment using the command `fhs`
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
       pkgs.buildFHSUserEnv (base // {

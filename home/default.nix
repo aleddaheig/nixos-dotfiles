@@ -1,5 +1,5 @@
 # home.nix
-{ config, inputs, pkgs, unstable, ... }: 
+{ config, pkgs, unstable, ... }: 
   let
     synology-drive-xcb = pkgs.synology-drive-client.overrideAttrs (prevAttrs: {
       nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
@@ -9,49 +9,54 @@
       '';
     });
   in {
+  
+  imports = [
+    ./modules/fhs.nix
+    ./modules/logseq.nix
+    ./modules/nixdev.nix
+  ];
+
   home.username = "tony";
   home.homeDirectory = "/home/tony";
 
   home.packages = with pkgs; [
-    bind
-    brave
-    btop
-    drawing
-    evince
-    file
-    floorp
-    focuswriter
-    gImageReader
-    gnome.ghex
-    htop
-    hunspellDicts.fr-any
-    imagemagick
-    jetbrains.datagrip
-    localsend
-    logseq
-    mumble
-    neofetch
-    nmap
-    p7zip
-    pciutils
-    pdfarranger
-    pfetch
-    remmina
-    shotcut
-    signal-desktop
-    synology-drive-xcb
-    teams-for-linux
-    telegram-desktop
-    tree
-    unzip
-    usbutils
-    vscodium.fhs
-    xournalpp
-    xz
-    yt-dlp
-    zeal
-    zip
-  ];
+      bind
+      brave
+      btop
+      drawing
+      evince
+      file
+      floorp
+      focuswriter
+      gImageReader
+      gnome.ghex
+      htop
+      hunspellDicts.fr-any
+      imagemagick
+      jetbrains.datagrip
+      localsend
+      mumble
+      neofetch
+      nmap
+      p7zip
+      pciutils
+      pdfarranger
+      pfetch
+      remmina
+      shotcut
+      signal-desktop
+      teams-for-linux
+      telegram-desktop
+      tree
+      unzip
+      usbutils
+      vscodium.fhs
+      xournalpp
+      xz
+      yt-dlp
+      zeal
+      zip
+    ] ++ (with unstable; [ synology-drive-client ]);
 
   xdg.desktopEntries = {
     umlet = {
@@ -95,6 +100,8 @@
       set shiftwidth=2
     '';
   };
+
+  #programs.nixvim.enable = true;
 
   programs.direnv = {
     enable = true;

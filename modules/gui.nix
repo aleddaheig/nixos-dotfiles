@@ -83,9 +83,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  programs.neovim.enable = true;
-  programs.neovim.defaultEditor = true;
-
   programs.wireshark = {
     enable = true;
     package = pkgs.wireshark-qt;
