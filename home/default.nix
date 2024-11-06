@@ -6,7 +6,7 @@
     ./modules/fhs.nix
     ./modules/logseq.nix
     ./modules/nixdev.nix
-    ./modules/neovim
+    ./modules/nixvim
   ];
 
   home.username = "tony";
