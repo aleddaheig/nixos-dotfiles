@@ -1,21 +1,24 @@
 # fw-al.nix
-{ config, lib, ... }:
+{ lib, pkgs, ... }:
 {
 
   imports = [
     ./hardware.nix
     ./disk.nix
 
+    ../modules/cli.nix
     ../modules/docker.nix
-    ../modules/gui.nix
+    ../modules/gnome.nix
     ../modules/printing.nix
+    ../modules/secure-boot.nix
     # ../modules/virtualbox.nix
+    ../modules/wireshark.nix
   ];
 
   # Networking
   networking = {
     hostName = "fw-al";
-    useDHCP = lib.mkDefault true;
+    networkmanager.enable = true;
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -57,9 +60,16 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-      "wireshark"
     ];
   };
+
+  fonts.packages = with pkgs; [
+    corefonts
+    ibm-plex
+    merriweather
+    noto-fonts
+    noto-fonts-emoji
+  ];
 
   # Updating Firmware
   services.fwupd.enable = true;

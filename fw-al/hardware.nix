@@ -2,9 +2,12 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
+  imports = [ inputs.nixos-hardware.nixosModules.framework-13-7040-amd ];
+
   boot = {
 
     loader = {
@@ -39,6 +42,8 @@
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
   };
+
+  networking.useDHCP = lib.mkDefault true;
 
   hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

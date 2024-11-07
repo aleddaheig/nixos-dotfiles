@@ -1,4 +1,3 @@
-{ ... }:
 {
   # Luks
   boot.initrd.luks.devices."crypted" = {
