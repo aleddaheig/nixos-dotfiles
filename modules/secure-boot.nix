@@ -1,7 +1,13 @@
 # secure-boot.nix
 # Requires lanzaboote flake
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
   # Quiet boot with plymouth - supports LUKS passphrase entry if needed
   boot.kernelParams = [
