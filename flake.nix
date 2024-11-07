@@ -27,16 +27,16 @@
   };
 
   outputs =
-    { nixpkgs, nixpkgs-unstable, ... }@inputs:
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       # Base OS configs
-      osModules = [
-        inputs.lanzaboote.nixosModules.lanzaboote
-        inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-        ./modules/nix.nix
-        ./modules/secure-boot.nix
-      ];
+      osModules = [ ./modules/nix.nix ];
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -48,31 +48,36 @@
       };
     in
     {
+      nixosConfigurations =
+        let
+          mkHost =
+            hostname:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs.inputs = inputs;
+              modules = osModules ++ [
+                # The system configuration
+                ./${hostname}
 
-      nixosConfigurations = {
-
-        fw-al = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = osModules ++ [
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  inherit pkgs;
-                  inherit unstable;
-                  inherit inputs;
-                };
-                useUserPackages = true;
-                users.tony = import ./home;
-              };
-            }
-            ./fw-al
-          ];
-          specialArgs = {
-            inherit inputs;
-          };
+                # Home manager configuration
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager = {
+                    extraSpecialArgs = {
+                      inherit pkgs;
+                      inherit unstable;
+                      inherit inputs;
+                    };
+                    useUserPackages = true;
+                    users.tony.imports = [ ./home ];
+                  };
+                }
+              ];
+            };
+        in
+        {
+          fw-al = mkHost "fw-al";
         };
 
-      };
     };
 }
