@@ -29,7 +29,6 @@
       hunspellDicts.fr-any
       imagemagick
       jetbrains.datagrip
-      localsend
       mumble
       neofetch
       nmap

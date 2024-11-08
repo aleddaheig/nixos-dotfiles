@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, private, ... }:
 {
   services.printing = {
     enable = true;
@@ -16,7 +16,7 @@
       {
         name = "Kyocera_FS-C2626MFP";
         location = "Home";
-        deviceUri = "socket://172.16.158.20";
+        deviceUri = "socket://${private.ip.printer1}";
         model = "Kyocera/Kyocera_FS-C2626MFP.ppd";
         ppdOptions = {
           PageSize = "A4";

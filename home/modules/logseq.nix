@@ -3,7 +3,7 @@
 let
   logseq = pkgs.logseq.overrideAttrs (oldAttrs: {
     postFixup = ''
-              makeWrapper ${pkgs.electron_27}/bin/electron $out/bin/${oldAttrs.pname} \
+              makeWrapper ${pkgs.electron_31}/bin/electron $out/bin/${oldAttrs.pname} \
       	  --set "LOCAL_GIT_DIRECTORY" ${pkgs.git} \
       	  --add-flags $out/share/${oldAttrs.pname}/resources/app \
       	  --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}" \

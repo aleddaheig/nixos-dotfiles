@@ -40,12 +40,12 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "electron-27.3.11" ];
       };
       unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
+      private = builtins.fromJSON (builtins.readFile (toString ./.private/private.json));
     in
     {
       nixosConfigurations =
@@ -54,7 +54,10 @@
             hostname:
             nixpkgs.lib.nixosSystem {
               inherit system;
-              specialArgs.inputs = inputs;
+              specialArgs = {
+                inherit inputs;
+                inherit private;
+              };
               modules = osModules ++ [
                 # The system configuration
                 ./${hostname}

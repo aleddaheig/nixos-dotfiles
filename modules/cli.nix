@@ -11,5 +11,6 @@
     gnupg
     inetutils
     openfortivpn
+    wl-clipboard
   ];
 }
