@@ -7,6 +7,7 @@
     ./modules/logseq.nix
     ./modules/nixdev.nix
     ./modules/nixvim
+    ./modules/pandoc.nix
   ];
 
   home.username = "tony";
