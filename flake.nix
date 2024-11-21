@@ -56,6 +56,7 @@
               inherit system;
               specialArgs = {
                 inherit inputs;
+                inherit unstable;
                 inherit private;
               };
               modules = osModules ++ [

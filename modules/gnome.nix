@@ -1,6 +1,6 @@
 # system.nix
 # Main system configuration
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 {
   imports = [ ./fprintd.nix ];
 
@@ -43,21 +43,26 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    drawing
-    gnome.ghex
-    gnome.gnome-tweaks
-    gnome.gpaste
-    gnome.networkmanager-openconnect
-    gnome.gnome-sound-recorder
-    gnomeExtensions.appindicator
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.night-theme-switcher
-    pinentry-gnome3
-  ];
+  environment.systemPackages =
+    (with pkgs; [
+      drawing
+      gnome.ghex
+      gnome.gnome-tweaks
+      gnome.gpaste
+      gnome.networkmanager-openconnect
+      gnome.gnome-sound-recorder
+      gnomeExtensions.appindicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.night-theme-switcher
+      pinentry-gnome3
+    ])
+    ++ (with unstable; [ sly ]);
 
-  environment.gnome.excludePackages = [ pkgs.epiphany ];
+  environment.gnome.excludePackages = with pkgs; [
+    epiphany
+    eog
+  ];
 
   # Add env vars
   environment.sessionVariables = {

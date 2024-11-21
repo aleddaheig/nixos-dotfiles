@@ -14,8 +14,7 @@
   home.homeDirectory = "/home/tony";
 
   home.packages =
-    with pkgs;
-    [
+    (with pkgs; [
       bind
       brave
       btop
@@ -43,7 +42,7 @@
       xz
       yt-dlp
       zip
-    ]
+    ])
     ++ (with unstable; [ synology-drive-client ]);
 
   programs.git = {
