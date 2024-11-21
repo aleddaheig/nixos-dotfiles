@@ -5,6 +5,7 @@
   imports = [
     ./hardware.nix
     ./disk.nix
+    ./schoolpkgs.nix
 
     ../modules/cli.nix
     ../modules/docker.nix

@@ -19,17 +19,13 @@
       bind
       brave
       btop
-      drawing
-      evince
       file
       floorp
       focuswriter
       gImageReader
-      gnome.ghex
       htop
       hunspellDicts.fr-any
       imagemagick
-      jetbrains.datagrip
       mumble
       neofetch
       nmap
@@ -38,18 +34,14 @@
       pdfarranger
       pfetch
       remmina
-      shotcut
       signal-desktop
-      teams-for-linux
       telegram-desktop
       tree
       unzip
       usbutils
       vscodium.fhs
-      xournalpp
       xz
       yt-dlp
-      zeal
       zip
     ]
     ++ (with unstable; [ synology-drive-client ]);

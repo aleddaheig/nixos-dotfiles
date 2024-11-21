@@ -1,9 +1,20 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    librsvg
-    texlive.combined.scheme-small
-  ];
+  home.packages = with pkgs; [ librsvg ];
+  programs.texlive = {
+    enable = true;
+    extraPackages = tpkgs: {
+      inherit (tpkgs)
+        scheme-small
+        collection-fontsrecommended
+        mathfont
+        kvmap
+        karnaugh-map
+        xstring
+        adjustbox
+        ;
+    };
+  };
   programs.pandoc = {
     package = pkgs.pandoc;
     enable = true;
