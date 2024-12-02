@@ -60,7 +60,6 @@
 
       alias tnc="nc -zv"
       alias gc="sudo nix-collect-garbage --delete-old"
-      alias logisim="java -jar ~/Dev/java/SYL/logisim-evolution.t.jar &"
     '';
 
     shellAliases = { };

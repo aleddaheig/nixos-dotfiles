@@ -12,6 +12,9 @@
         karnaugh-map
         xstring
         adjustbox
+        svg
+        trimspaces
+        transparent
         ;
     };
   };

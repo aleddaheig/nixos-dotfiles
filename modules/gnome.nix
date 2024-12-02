@@ -46,23 +46,24 @@
   environment.systemPackages =
     (with pkgs; [
       drawing
-      gnome.ghex
-      gnome.gnome-tweaks
-      gnome.gpaste
-      gnome.networkmanager-openconnect
-      gnome.gnome-sound-recorder
-      gnomeExtensions.appindicator
-      gnomeExtensions.blur-my-shell
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.night-theme-switcher
       pinentry-gnome3
+    ])
+    ++ (with pkgs.gnome; [
+      ghex
+      gnome-tweaks
+      gpaste
+      networkmanager-openconnect
+      gnome-sound-recorder
+    ])
+    ++ (with pkgs.gnomeExtensions; [
+      appindicator
+      blur-my-shell
+      dash-to-dock
+      night-theme-switcher
     ])
     ++ (with unstable; [ sly ]);
 
-  environment.gnome.excludePackages = with pkgs; [
-    epiphany
-    eog
-  ];
+  environment.gnome.excludePackages = (with pkgs; [ epiphany ]) ++ (with pkgs.gnome; [ eog ]);
 
   # Add env vars
   environment.sessionVariables = {

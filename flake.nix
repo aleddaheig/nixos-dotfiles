@@ -2,7 +2,7 @@
   description = "My personal flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Secure Boot for NixOS
@@ -13,7 +13,7 @@
 
     # User profile manager based on Nix
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,7 +21,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -41,6 +41,11 @@
         inherit system;
         config.allowUnfree = true;
       };
+      customPkgs = import ./pkgs {
+        inherit nixpkgs;
+        pkgs = nixpkgs.legacyPackages.${system};
+      };
+
       unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -55,9 +60,12 @@
             nixpkgs.lib.nixosSystem {
               inherit system;
               specialArgs = {
-                inherit inputs;
-                inherit unstable;
-                inherit private;
+                inherit
+                  inputs
+                  unstable
+                  customPkgs
+                  private
+                  ;
               };
               modules = osModules ++ [
                 # The system configuration
@@ -68,9 +76,7 @@
                 {
                   home-manager = {
                     extraSpecialArgs = {
-                      inherit pkgs;
-                      inherit unstable;
-                      inherit inputs;
+                      inherit pkgs unstable inputs;
                     };
                     useUserPackages = true;
                     users.tony.imports = [ ./home ];
