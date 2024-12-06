@@ -54,6 +54,8 @@
     noto-fonts-emoji
   ];
 
+  #systemd.enableStrictShellChecks = true;
+
   # Updating Firmware
   services.fwupd.enable = true;
 

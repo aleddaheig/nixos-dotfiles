@@ -23,7 +23,7 @@
     initrd = {
       # Start systemd on early stage
       systemd.enable = true;
-      systemd.enableTpm2 = false;
+      systemd.tpm2.enable = false;
 
       availableKernelModules = [
         "xhci_pci"
@@ -47,5 +47,5 @@
 
   hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
+  hardware.framework.amd-7040.preventWakeOnAC = true;
 }

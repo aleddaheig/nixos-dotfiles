@@ -19,10 +19,10 @@
         [org.gnome.mutter]
         experimental-features=['scale-monitor-framebuffer']
       '';
-      extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
+      extraGSettingsOverridePackages = [ pkgs.mutter ];
 
       # Workaround for Gnome-control-center missing schema
-      sessionPath = [ pkgs.gnome.gpaste ];
+      sessionPath = [ pkgs.gpaste ];
     };
     xkb = {
       layout = "us";
@@ -31,8 +31,8 @@
   };
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -47,11 +47,9 @@
     (with pkgs; [
       drawing
       pinentry-gnome3
-    ])
-    ++ (with pkgs.gnome; [
+      gpaste
       ghex
       gnome-tweaks
-      gpaste
       networkmanager-openconnect
       gnome-sound-recorder
     ])
@@ -63,7 +61,10 @@
     ])
     ++ (with unstable; [ sly ]);
 
-  environment.gnome.excludePackages = (with pkgs; [ epiphany ]) ++ (with pkgs.gnome; [ eog ]);
+  environment.gnome.excludePackages = with pkgs; [
+    epiphany
+    eog
+  ];
 
   # Add env vars
   environment.sessionVariables = {
