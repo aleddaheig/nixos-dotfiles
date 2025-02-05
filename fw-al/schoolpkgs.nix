@@ -13,11 +13,13 @@ let
   });
 in
 {
+  programs.nix-ld.enable = true;
   environment.systemPackages =
     (with pkgs; [
       teams-for-linux
       xournalpp
       zeal
+      onlyoffice-bin
     ])
     ++ (with customPkgs; [ windsurf ])
     ++ (with unstable; [ jetbrains.datagrip ])

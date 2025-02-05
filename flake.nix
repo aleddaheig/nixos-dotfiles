@@ -20,9 +20,14 @@
     # Provides module support for specific vendor hardware 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Nixvim
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
     };
   };
 

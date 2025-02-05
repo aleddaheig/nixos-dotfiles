@@ -3,5 +3,9 @@ let
   inherit (pkgs) callPackage;
 in
 {
-  windsurf = callPackage ./windsurf.nix { inherit nixpkgs; };
+  windsurf = callPackage ./windsurf { 
+    inputs = {
+      inherit nixpkgs;
+    }; 
+  };
 }

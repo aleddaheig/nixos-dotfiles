@@ -7,6 +7,7 @@
     gdb
     git
     git-crypt
+    git-lfs
     gnumake
     gnupg
     inetutils

@@ -10,11 +10,15 @@
     ../modules/cli.nix
     ../modules/docker.nix
     ../modules/gnome.nix
+    ../modules/kde.nix
     ../modules/localsend.nix
+    ../modules/ollama.nix
     ../modules/printing.nix
     ../modules/secure-boot.nix
-    # ../modules/virtualbox.nix
+    ../modules/ssh.nix
+    #../modules/virtualbox.nix
     ../modules/wireshark.nix
+    ../modules/ghostty.nix
   ];
 
   # Networking
@@ -25,6 +29,10 @@
       enable = true;
       allowedTCPPorts = [ 5656 ];
     };
+    extraHosts =
+      ''
+        172.16.159.38 git.infologin.ch
+      '';
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -13,40 +13,39 @@
   home.username = "tony";
   home.homeDirectory = "/home/tony";
 
-  home.packages =
-    (with pkgs; [
-      bind
-      brave
-      btop
-      file
-      floorp
-      focuswriter
-      gImageReader
-      htop
-      hunspellDicts.fr-any
-      imagemagick
-      mumble
-      neofetch
-      nmap
-      p7zip
-      pciutils
-      pdfarranger
-      pfetch
-      remmina
-      signal-desktop
-      telegram-desktop
-      tree
-      unzip
-      usbutils
-      vscodium.fhs
-      xz
-      yt-dlp
-      zip
-    ])
-    ++ (with unstable; [ synology-drive-client ]);
+  home.packages = with pkgs; [
+    bind
+    brave
+    btop
+    file
+    floorp
+    gImageReader
+    htop
+    hunspellDicts.fr-any
+    imagemagick
+    neofetch
+    nmap
+    nvtopPackages.amd
+    p7zip
+    pciutils
+    pdfarranger
+    pfetch
+    remmina
+    signal-desktop
+    synology-drive-client
+    telegram-desktop
+    tree
+    unzip
+    usbutils
+    vscodium.fhs
+    xz
+    yt-dlp
+    zip
+  ];
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "Anthony Ledda";
     userEmail = "anthony.ledda@heig-vd.ch";
   };

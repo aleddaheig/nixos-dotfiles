@@ -9,18 +9,6 @@
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  # Quiet boot with plymouth - supports LUKS passphrase entry if needed
-  boot.kernelParams = [
-    "quiet"
-    "rd.systemd.show_status=false"
-    "rd.udev.log_level=3"
-    "udev.log_priority=3"
-    "boot.shell_on_fail"
-  ];
-  boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
-  boot.plymouth.enable = true;
-
   # Bootspec and Secure Boot using lanzaboote
   #
   # See: https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md

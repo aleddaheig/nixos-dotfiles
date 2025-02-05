@@ -1,6 +1,4 @@
-# system.nix
-# Main system configuration
-{ pkgs, unstable, ... }:
+{ pkgs, unstable, lib, ... }:
 {
   imports = [ ./fprintd.nix ];
 
@@ -59,16 +57,20 @@
       dash-to-dock
       night-theme-switcher
     ])
-    ++ (with unstable; [ sly ]);
+    ++ (with unstable; [
+      sly
+    ]);
 
   environment.gnome.excludePackages = with pkgs; [
     epiphany
     eog
+    kgx
+    evince
   ];
 
   # Add env vars
-  environment.sessionVariables = {
-    QT_QPA_PLATFORM = "wayland;xcb";
+  environment.sessionVariables = lib.mkForce {
+    GSK_RENDERER = "ngl";
     NIXOS_OZONE_WL = "1";
   };
 
