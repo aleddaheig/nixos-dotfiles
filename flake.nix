@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Provides module support for specific vendor hardware 
+    # Provides module support for specific vendor hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Nixvim
@@ -67,6 +67,7 @@
               specialArgs = {
                 inherit
                   inputs
+                  nixpkgs
                   unstable
                   customPkgs
                   private

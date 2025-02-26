@@ -17,6 +17,7 @@
     bind
     brave
     btop
+    cookiecutter
     file
     floorp
     gImageReader
@@ -62,6 +63,10 @@
     '';
 
     shellAliases = { };
+  };
+
+  programs.nix-index = {
+    enable = true;
   };
 
   programs.direnv = {

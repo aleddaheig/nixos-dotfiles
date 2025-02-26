@@ -16,7 +16,7 @@
     ../modules/printing.nix
     ../modules/secure-boot.nix
     ../modules/ssh.nix
-    #../modules/virtualbox.nix
+    ../modules/virtualbox.nix
     ../modules/wireshark.nix
     ../modules/ghostty.nix
   ];

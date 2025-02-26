@@ -20,6 +20,8 @@ in
       xournalpp
       zeal
       onlyoffice-bin
+      jetbrains.ruby-mine
+      awscli2
     ])
     ++ (with customPkgs; [ windsurf ])
     ++ (with unstable; [ jetbrains.datagrip ])

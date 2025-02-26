@@ -1,4 +1,9 @@
-{ pkgs, unstable, lib, ... }:
+{
+  pkgs,
+  unstable,
+  lib,
+  ...
+}:
 {
   imports = [ ./fprintd.nix ];
 
@@ -13,11 +18,11 @@
       enable = true;
 
       # Enable fractional scaling
+      extraGSettingsOverridePackages = [ pkgs.mutter ];
       extraGSettingsOverrides = ''
         [org.gnome.mutter]
         experimental-features=['scale-monitor-framebuffer']
       '';
-      extraGSettingsOverridePackages = [ pkgs.mutter ];
 
       # Workaround for Gnome-control-center missing schema
       sessionPath = [ pkgs.gpaste ];
@@ -68,8 +73,15 @@
     evince
   ];
 
+  programs.dconf.profiles.gdm.databases = [
+    {
+      settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
+    }
+  ];
+
   # Add env vars
   environment.sessionVariables = lib.mkForce {
+    #NAUTILUS_4_EXTENSION_DIR = "${pkgs.nautilus-python}/lib/nautilus/extensions-4";
     GSK_RENDERER = "ngl";
     NIXOS_OZONE_WL = "1";
   };
