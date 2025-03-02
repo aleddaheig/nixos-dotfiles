@@ -44,6 +44,8 @@
     pulse.enable = true;
   };
 
+  programs.dconf.enable = true;
+
   environment.pathsToLink = [
     "/share/nautilus-python/extensions"
   ];
@@ -80,8 +82,8 @@
 
   # Add env vars
   environment.sessionVariables = {
-    GSK_RENDERER = "ngl";
-    NIXOS_OZONE_WL = "1";
+    GSK_RENDERER = lib.mkDefault "ngl";
+    NIXOS_OZONE_WL = lib.mkDefault "1";
   };
 
 }

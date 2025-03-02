@@ -1,8 +1,13 @@
-{ pkgs, unstable, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   environment.systemPackages =
     (with pkgs; [
-      adwaita-qt
+      adwaita-qt6
     ])
     ++ (with pkgs.kdePackages; [
       okular
@@ -16,10 +21,14 @@
   };
 
   # Add env vars
-  environment.sessionVariables = lib.mkForce {
-    QT_STYLE_OVERRIDE = "adwaita";
-    QT_QPA_PLATFORM = "wayland;xcb";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1.5";
-  };
+  environment.sessionVariables =
+    {
+      QT_STYLE_OVERRIDE = lib.mkDefault "adwaita";
+      QT_QPA_PLATFORM = lib.mkDefault "xcb;wayland";
+      QT_SCREEN_SCALE_FACTORS = lib.mkDefault "1.5";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = lib.mkDefault "1";
+    }
+    // lib.optionalAttrs (config.services.xserver.enable) {
+      GDK_SCALE = "1.5";
+    };
 }
