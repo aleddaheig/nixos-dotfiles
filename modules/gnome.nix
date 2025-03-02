@@ -44,6 +44,10 @@
     pulse.enable = true;
   };
 
+  environment.pathsToLink = [
+    "/share/nautilus-python/extensions"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages =
@@ -53,6 +57,7 @@
       gpaste
       ghex
       gnome-tweaks
+      nautilus-python
       networkmanager-openconnect
       gnome-sound-recorder
     ])
@@ -73,15 +78,8 @@
     evince
   ];
 
-  programs.dconf.profiles.gdm.databases = [
-    {
-      settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
-    }
-  ];
-
   # Add env vars
-  environment.sessionVariables = lib.mkForce {
-    #NAUTILUS_4_EXTENSION_DIR = "${pkgs.nautilus-python}/lib/nautilus/extensions-4";
+  environment.sessionVariables = {
     GSK_RENDERER = "ngl";
     NIXOS_OZONE_WL = "1";
   };

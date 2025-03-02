@@ -18,7 +18,6 @@
     ../modules/ssh.nix
     ../modules/virtualbox.nix
     ../modules/wireshark.nix
-    ../modules/ghostty.nix
   ];
 
   # Networking

@@ -1,5 +1,11 @@
 # home.nix
-{ pkgs, unstable, ... }:
+{
+  inputs,
+  pkgs,
+  unstable,
+  lib,
+  ...
+}:
 {
 
   imports = [
@@ -13,36 +19,46 @@
   home.username = "tony";
   home.homeDirectory = "/home/tony";
 
-  home.packages = with pkgs; [
-    bind
-    brave
-    btop
-    cookiecutter
-    file
-    floorp
-    gImageReader
-    htop
-    hunspellDicts.fr-any
-    imagemagick
-    neofetch
-    nmap
-    nvtopPackages.amd
-    p7zip
-    pciutils
-    pdfarranger
-    pfetch
-    remmina
-    signal-desktop
-    synology-drive-client
-    telegram-desktop
-    tree
-    unzip
-    usbutils
-    vscodium.fhs
-    xz
-    yt-dlp
-    zip
-  ];
+  home.packages =
+    (with pkgs; [
+      bind
+      brave
+      btop
+      cookiecutter
+      file
+      floorp
+      gImageReader
+      htop
+      hunspellDicts.fr-any
+      imagemagick
+      neofetch
+      nmap
+      nvtopPackages.amd
+      p7zip
+      pciutils
+      pdfarranger
+      pfetch
+      remmina
+      signal-desktop
+      synology-drive-client
+      telegram-desktop
+      tree
+      unzip
+      usbutils
+      vscodium.fhs
+      xz
+      yt-dlp
+      zip
+    ])
+    ++ (with inputs; [
+      ghostty.packages.x86_64-linux.default
+    ]);
+
+  home.sessionVariables = {
+    PATH = lib.mkDefault "$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin";
+    VSCODE_GALLERY_SERVICE_URL = lib.mkDefault "https://marketplace.visualstudio.com/_apis/public/gallery";
+    VSCODE_GALLERY_ITEM_URL = lib.mkDefault "https://marketplace.visualstudio.com/items";
+  };
 
   programs.git = {
     enable = true;
@@ -56,8 +72,6 @@
     enableCompletion = true;
 
     bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-
       alias tnc="nc -zv"
       alias gc="sudo nix-collect-garbage --delete-old"
     '';
