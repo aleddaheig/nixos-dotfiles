@@ -1,0 +1,3 @@
+[submodule "home/modules/nixvim"]
+	path = home/modules/nixvim
+	url = git@github.com:aleddaheig/nixvim.git
