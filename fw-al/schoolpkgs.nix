@@ -20,10 +20,12 @@ in
       xournalpp
       zeal
       onlyoffice-bin
-      jetbrains.ruby-mine
       awscli2
+      vegeta
+      puppeteer-cli
+      google-cloud-sdk
     ])
     ++ (with customPkgs; [ windsurf ])
-    ++ (with unstable; [ jetbrains.datagrip ])
+    ++ (with unstable; [ jetbrains.idea-ultimate ])
     ++ [ logisim-evolution-t ];
 }

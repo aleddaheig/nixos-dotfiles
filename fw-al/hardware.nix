@@ -49,7 +49,6 @@
     ];
 
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
     consoleLogLevel = 0;
     initrd.verbose = false;
@@ -83,6 +82,13 @@
   # This is necesery because many programs hard-code the path to hip
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
+  # For virtualbox
+  boot.blacklistedKernelModules = [
+    "kvm"
+    "kvm_amd"
+    "ccp"
   ];
 
 }

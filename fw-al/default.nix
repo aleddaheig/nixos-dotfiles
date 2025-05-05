@@ -10,7 +10,7 @@
     ../modules/cli.nix
     ../modules/docker.nix
     ../modules/gnome.nix
-    ../modules/kde.nix
+    ../modules/kdePackages.nix
     ../modules/localsend.nix
     ../modules/ollama.nix
     ../modules/printing.nix
@@ -23,15 +23,28 @@
   # Networking
   networking = {
     hostName = "fw-al";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      enableStrongSwan = true;
+      plugins = [
+        pkgs.networkmanager-l2tp
+        pkgs.networkmanager_strongswan
+      ];
+    };
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 5656 ];
+      allowedTCPPorts = [
+        5656
+        3000
+      ];
     };
-    extraHosts =
-      ''
-        172.16.159.38 git.infologin.ch
-      '';
+    extraHosts = ''
+      172.16.159.38 git.infologin.ch
+    '';
+  };
+
+  services.strongswan = {
+    enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -54,6 +67,7 @@
   };
 
   fonts.packages = with pkgs; [
+    maple-mono
     corefonts
     ibm-plex
     merriweather

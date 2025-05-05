@@ -15,6 +15,7 @@
         svg
         trimspaces
         transparent
+        fvextra
         ;
     };
   };

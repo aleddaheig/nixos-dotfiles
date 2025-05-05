@@ -14,6 +14,7 @@
     ./modules/nixdev.nix
     ./modules/nixvim
     ./modules/pandoc.nix
+    ./modules/vscodium.nix
   ];
 
   home.username = "tony";
@@ -45,7 +46,6 @@
       tree
       unzip
       usbutils
-      vscodium.fhs
       xz
       yt-dlp
       zip
@@ -55,7 +55,7 @@
     ]);
 
   home.sessionVariables = {
-    PATH = lib.mkDefault "$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin";
+    PATH = lib.mkDefault "$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/JetBrains/Toolbox/scripts";
     VSCODE_GALLERY_SERVICE_URL = lib.mkDefault "https://marketplace.visualstudio.com/_apis/public/gallery";
     VSCODE_GALLERY_ITEM_URL = lib.mkDefault "https://marketplace.visualstudio.com/items";
   };
@@ -72,8 +72,10 @@
     enableCompletion = true;
 
     bashrcExtra = ''
+      alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
       alias tnc="nc -zv"
       alias gc="sudo nix-collect-garbage --delete-old"
+      alias n-file="nix-locate --top-level --whole-name --minimal"
     '';
 
     shellAliases = { };

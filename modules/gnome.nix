@@ -84,6 +84,7 @@
   environment.sessionVariables = {
     GSK_RENDERER = lib.mkDefault "ngl";
     NIXOS_OZONE_WL = lib.mkDefault "1";
+    ELECTRON_OZONE_PLATFORM_HINT = lib.mkDefault "auto";  # Auto-detect Wayland
   };
 
 }
