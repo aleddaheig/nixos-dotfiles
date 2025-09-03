@@ -1,7 +1,6 @@
 {
   pkgs,
   unstable,
-  customPkgs,
   ...
 }:
 let
@@ -17,15 +16,18 @@ in
   environment.systemPackages =
     (with pkgs; [
       teams-for-linux
-      xournalpp
-      zeal
       onlyoffice-bin
-      awscli2
-      vegeta
-      puppeteer-cli
-      google-cloud-sdk
+      # awscli2
+      # vegeta
+      # puppeteer-cli
+      # google-cloud-sdk
+      # minikube
+      # terraform
     ])
-    ++ (with customPkgs; [ windsurf ])
-    ++ (with unstable; [ jetbrains.idea-ultimate ])
-    ++ [ logisim-evolution-t ];
+    ++ (with unstable; [
+      # jetbrains.idea-ultimate
+      jetbrains.clion
+      windsurf
+    ]);
+  #++ [ logisim-evolution-t ];
 }

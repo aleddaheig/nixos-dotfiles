@@ -23,8 +23,11 @@ in
     jq
     just
     myaspell
+    ncdu
     openfortivpn
     redis
+    typst
     wl-clipboard
+    ripgrep
   ];
 }

@@ -10,7 +10,7 @@
 
   imports = [
     ./modules/fhs.nix
-    ./modules/logseq.nix
+    #./modules/logseq.nix
     ./modules/nixdev.nix
     ./modules/nixvim
     ./modules/pandoc.nix
@@ -27,7 +27,7 @@
       btop
       cookiecutter
       file
-      floorp
+      firefox
       gImageReader
       htop
       hunspellDicts.fr-any
@@ -55,10 +55,16 @@
     ]);
 
   home.sessionVariables = {
-    PATH = lib.mkDefault "$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.local/share/JetBrains/Toolbox/scripts";
     VSCODE_GALLERY_SERVICE_URL = lib.mkDefault "https://marketplace.visualstudio.com/_apis/public/gallery";
     VSCODE_GALLERY_ITEM_URL = lib.mkDefault "https://marketplace.visualstudio.com/items";
+    EDITOR = "nvim";
   };
+
+  home.sessionPath = [
+    "$HOME/go/bin"
+    "$HOME/bin:"
+    "$HOME/.local/bin"
+  ];
 
   programs.git = {
     enable = true;
@@ -78,7 +84,14 @@
       alias n-file="nix-locate --top-level --whole-name --minimal"
     '';
 
-    shellAliases = { };
+    initExtra = ''
+      . "${pkgs.git}/share/git/contrib/completion/git-prompt.sh"
+      export PS1='\[\033[01;32m\]\u@\h \[\033[01;36m\]\w\[\033[01;34m\]$(__git_ps1 " (%s)")\[\033[00m\] \$ '
+    '';
+
+    shellAliases = {
+      kubectl = "minikube kubectl --";
+    };
   };
 
   programs.nix-index = {
@@ -100,7 +113,7 @@
     ];
   };
 
-  services.gpg-agent.pinentryPackage = "pkgs.pinentry-gnome3";
+  services.gpg-agent.pinentry.package = "pkgs.pinentry-gnome3";
 
   home.stateVersion = "24.05";
 

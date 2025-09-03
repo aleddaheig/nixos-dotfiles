@@ -61,7 +61,6 @@
       gnome-tweaks
       nautilus-python
       networkmanager-openconnect
-      gnome-sound-recorder
     ])
     ++ (with pkgs.gnomeExtensions; [
       appindicator
@@ -70,7 +69,7 @@
       night-theme-switcher
     ])
     ++ (with unstable; [
-      sly
+      gradia
     ]);
 
   environment.gnome.excludePackages = with pkgs; [
@@ -84,7 +83,7 @@
   environment.sessionVariables = {
     GSK_RENDERER = lib.mkDefault "ngl";
     NIXOS_OZONE_WL = lib.mkDefault "1";
-    ELECTRON_OZONE_PLATFORM_HINT = lib.mkDefault "auto";  # Auto-detect Wayland
+    ELECTRON_OZONE_PLATFORM_HINT = lib.mkDefault "auto"; # Auto-detect Wayland
   };
 
 }

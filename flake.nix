@@ -2,18 +2,18 @@
   description = "My personal flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Secure Boot for NixOS
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.3.0";
+      url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # User profile manager based on Nix
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -36,6 +36,7 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
+      self,
       ...
     }@inputs:
     let
@@ -58,6 +59,8 @@
       private = builtins.fromJSON (builtins.readFile (toString ./.private/private.json));
     in
     {
+      formatter.${system} = pkgs.nixfmt-tree;
+
       nixosConfigurations =
         let
           mkHost =
@@ -82,7 +85,12 @@
                 {
                   home-manager = {
                     extraSpecialArgs = {
-                      inherit pkgs unstable inputs;
+                      inherit
+                        pkgs
+                        unstable
+                        inputs
+                        self
+                        ;
                     };
                     useUserPackages = true;
                     users.tony.imports = [ ./home ];

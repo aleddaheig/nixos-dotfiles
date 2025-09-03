@@ -1,5 +1,10 @@
 # fw-al.nix
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  private,
+  ...
+}:
 {
 
   imports = [
@@ -10,6 +15,7 @@
     ../modules/cli.nix
     ../modules/docker.nix
     ../modules/gnome.nix
+    ../modules/ios.nix
     ../modules/kdePackages.nix
     ../modules/localsend.nix
     ../modules/ollama.nix
@@ -25,26 +31,17 @@
     hostName = "fw-al";
     networkmanager = {
       enable = true;
-      enableStrongSwan = true;
-      plugins = [
-        pkgs.networkmanager-l2tp
-        pkgs.networkmanager_strongswan
-      ];
     };
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        5656
-        3000
       ];
     };
     extraHosts = ''
-      172.16.159.38 git.infologin.ch
+      ${private.ip.git} git.infologin.ch
+      ${private.ip.rs} rapport.infologin.ch
+      ${private.ip.vlt} vlt.infologin.ch
     '';
-  };
-
-  services.strongswan = {
-    enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -55,7 +52,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
-  i18n.defaultLocale = "en_US.utf8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   users.users.tony = {
     isNormalUser = true;
@@ -63,11 +60,14 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "input"
+      "libvirt"
+      "kvm"
     ];
   };
 
   fonts.packages = with pkgs; [
-    maple-mono
+    maple-mono.NF
     corefonts
     ibm-plex
     merriweather
